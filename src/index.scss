@@ -1,0 +1,25 @@
+@use './styles/partials/typography' as *;
+@use './styles/partials/mixins' as *;
+@use './styles/partials/variables' as *;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'rubik', Helvetica, Arial, sans-serif;
+}
+
+body {
+  --primary-text: #373A40;
+  --primary-bg: #6DA4AA;
+  --primary-label: #F0F0F0;
+  --secondary: #686D76;
+  --secondary-light: #BDC5D5;
+  --bg: #135D66;
+  --bg-light: #F5F7F8;
+  --support: #EA5455;
+}
