@@ -250,6 +250,55 @@ Response:
 
 ```
 
+**GET /projects/:id**
+
+- Get single project data
+
+Parameters:
+
+- Authorization header: Bearer Token - required
+- project id route parameter - required
+
+Response:
+
+```
+{
+  "id": "b4200cac-e736-4c16-8b77-a98ec3af6515",
+  "title": "instock",
+  "description": "",
+  "manager_id" : "3312c711-65ff-427e-af6d-b767f429c3e5",
+  "team" : [
+    {
+      "id": "3312c711-65ff-427e-af6d-b767f429c3e5",
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "role": "manager"
+    },
+    {
+      "id": "3312c711-65ff-427e-af6d-b767f429c3e5",
+      "firstName": "Kate",
+      "lastName": "Smith",
+      "role": "member"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "b4200cac-e736-4c16-8b77-a98ec3af6515",
+      "title" : "Create Header",
+      "description": "",
+      "user": {
+        "id": "3312c711-65ff-427e-af6d-b767f429c3e5",
+        "firstName": "John",
+        "lastName": "Doe"
+      },
+      "project_id": "b4200cac-e736-4c16-8b77-a98ec3af6515",
+      "status": "to do"
+    },
+    ...
+  ]
+}
+```
+
 **PUT /projects/:id**
 
 - Update a project
@@ -356,13 +405,14 @@ Response:
 
 ```
 
-**PUT /tasks/:id**
+**PUT /projects/:projectId/tasks/:taskId**
 
 - Update a task
 
 Parameters:
 
 - Authorization header: Bearer Token - required
+- project id route parameter - required
 - task id route parameter - required
 - Request body:
   - title: task title - required
@@ -391,13 +441,14 @@ Response:
 
 ```
 
-**DELETE /tasks/:id**
+**DELETE /projects/:projectId/tasks/:id**
 
 - Delete a task
 
 Parameters:
 
 - Authorization header: Bearer Token - required
+- project id route parameter - required
 - task id route parameter - required
 
 Response:
@@ -420,10 +471,10 @@ no content
 ## Roadmap
 
 - Create Client
-- react project with routes, components and pages
+  - React project with routes, components and pages
 
 - Create server
-- express project with routing
+  - Express project with routing
 
 - Create Migrations
 
@@ -483,3 +534,4 @@ no content
 - Real time communication (messaging) between team members
 - Discussion threads on projects and tasks
 - Unit and Integration Tests
+- Utilize typescript in both Client and Server
