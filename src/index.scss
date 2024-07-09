@@ -20,9 +20,10 @@ body {
   --secondary: #686D76;
   --secondary-light: #BDC5D5;
   --bg-main: #fdfdfd;
-  --bg: #135D66;
-  --bg-light: #F5F7F8;
-  --support: #EA5455;
+  --primary-bg: #135D66;
+  --primary-btn-text: #ffffff;
+  --secondary-bg: #F5F7F8;
+  --support-danger: #EA5455;
   --logo: #31363F;
 }
 
@@ -44,10 +45,17 @@ body {
   }
 }
 
-.labels {
+.link-text {
   @include text-style(0.813rem, 1.25rem);
   @include tablet {
     @include text-style(0.9rem, 1.375rem);
+  }
+}
+
+.labels {
+  @include text-style(0.9rem, 1.25rem);
+  @include tablet {
+    @include text-style(1rem, 1.375rem);
   }
 }
 

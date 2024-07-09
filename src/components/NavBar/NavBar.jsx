@@ -22,7 +22,7 @@ const NavBar = () => {
       },
       {
         name: "Signup/Login",
-        link: "/",
+        link: "/login",
       },
       {
         name: "Logout",
@@ -82,7 +82,7 @@ const NavBar = () => {
           itemList={generateSettingsList()}
         />
 
-        <Link to="/" className="nav__link">
+        <Link to="/login" className="nav__link">
           Log In/Sign Up
         </Link>
         <div>

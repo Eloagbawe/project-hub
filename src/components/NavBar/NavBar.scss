@@ -9,11 +9,10 @@
     color: var(--logo);
   }
 
-
   &__link {
     font-size: 0.9rem;
     color: var(--primary-text);
-    @extend .labels;
+    @extend .link-text;
     transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {

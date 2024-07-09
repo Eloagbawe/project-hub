@@ -3,11 +3,9 @@
 @import "../../index.scss";
 
 .menu {
-
   &__text {
     font-size: 0.9rem;
     color: var(--primary-text);
-    @extend .labels;
+    @extend .link-text;
   }
-
 }

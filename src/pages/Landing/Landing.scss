@@ -10,7 +10,7 @@
     @include tablet {
       @include text-style(3.5rem, 3rem);
     }
-    
+
     @include large-desktop {
       @include text-style(4.5rem, 3rem);
     }
@@ -22,8 +22,8 @@
   }
 
   &__button {
-    background-color: var(--bg);
-    color: $white;
+    background-color: var(--primary-bg);
+    color: var(--primary-btn-text);
     font-weight: 500;
     @include text-style(1rem, 1.25rem);
     @include tablet {
