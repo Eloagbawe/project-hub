@@ -1,0 +1,12 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.profile {
+  background-color: var(--bg-light);
+  &__text {
+    color: var(--primary-text);
+    font-weight: 500;
+    @extend .labels;
+  }
+}
