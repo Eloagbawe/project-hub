@@ -1,0 +1,33 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.landing {
+  &__heading {
+    color: var(--primary-text);
+    @include text-style(2.5rem, 2.25rem);
+
+    @include tablet {
+      @include text-style(3.5rem, 3rem);
+    }
+    
+    @include large-desktop {
+      @include text-style(4.5rem, 3rem);
+    }
+    font-weight: 700;
+  }
+
+  &__text {
+    color: var(--primary);
+  }
+
+  &__button {
+    background-color: var(--bg);
+    color: $white;
+    font-weight: 500;
+    @include text-style(1rem, 1.25rem);
+    @include tablet {
+      @include text-style(1.5rem, 1.375rem);
+    }
+  }
+}
