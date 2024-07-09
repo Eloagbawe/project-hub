@@ -1,0 +1,13 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.menu {
+
+  &__text {
+    font-size: 0.9rem;
+    color: var(--primary-text);
+    @extend .labels;
+  }
+
+}
