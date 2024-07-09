@@ -10,16 +10,64 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'rubik', Helvetica, Arial, sans-serif;
+  font-family: 'rubik', sans-serif;
 }
 
 body {
   --primary-text: #373A40;
-  --primary-bg: #6DA4AA;
+  --primary: #2D9596;
   --primary-label: #F0F0F0;
   --secondary: #686D76;
   --secondary-light: #BDC5D5;
+  --bg-main: #fdfdfd;
   --bg: #135D66;
   --bg-light: #F5F7F8;
   --support: #EA5455;
+  --logo: #31363F;
+}
+
+body {
+  background-color: var(--bg-main);
+}
+
+.page-header {
+  @include text-style(1.75rem, 2.25rem);
+  @include tablet {
+    @include text-style(2rem, 2.5rem);
+  }
+}
+
+.sub-header {
+  @include text-style(1.25rem, 1.75rem);
+  @include tablet {
+    @include text-style(1.5rem, 2rem);
+  }
+}
+
+.labels {
+  @include text-style(0.813rem, 1.25rem);
+  @include tablet {
+    @include text-style(0.9rem, 1.375rem);
+  }
+}
+
+.body-large {
+  @include text-style(0.9375rem, 1.625rem);
+  @include tablet {
+    @include text-style(1rem, 1.75rem);
+  }
+}
+
+.body-medium {
+  @include text-style(0.8125rem, 1.25rem);
+  @include tablet {
+    @include text-style(0.875rem, 1.375rem);
+  }
+}
+
+.body-small {
+  @include text-style(0.7rem, 1rem);
+  @include tablet {
+    @include text-style(0.75rem, 1.125rem);
+  }
 }
