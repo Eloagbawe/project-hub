@@ -10,15 +10,21 @@
   }
 }
 
+@mixin large-desktop {
+  @media screen and (min-width: 1400px) {
+    @content;
+  }
+}
+
+
 @mixin media-query($min-width) {
   @media screen and (min-width: $min-width) {
     @content;
   }
 }
 
-@mixin text-style($fontSize, $fontWeight, $lineHeight) {
+@mixin text-style($fontSize, $lineHeight) {
   font-size: $fontSize;
-  font-weight: $fontWeight;
   line-height: $lineHeight;
 }
 
@@ -29,6 +35,12 @@
 
 @mixin x-align--desktop {
   max-width: 63.75rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin x-align--large-desktop {
+  max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
 }
