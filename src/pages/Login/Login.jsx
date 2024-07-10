@@ -142,7 +142,7 @@ const Login = () => {
             </div>
           </div>
 
-          <button className="login__btn rounded-full px-8 md:px-16 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center">
+          <button className="login__btn rounded-full px-8 md:px-16 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center">
             Log In
             {loginLoading && <Spinner size="xs" />}
           </button>

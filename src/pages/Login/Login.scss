@@ -11,12 +11,13 @@
   }
 
   &__label {
-    @extend .labels;
+    @extend .labels-small;
     font-weight: 500;
   }
 
   &__input, &__input-container {
     border-color: var(--secondary-light);
+    @extend .body-medium;
 
     &:focus {
       border-color: var(--secondary);
