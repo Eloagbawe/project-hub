@@ -4,9 +4,19 @@
 
 .profile {
   background-color: var(--secondary-bg);
+  color: var(--primary-text);
+
   &__text {
-    color: var(--primary-text);
     font-weight: 500;
     @extend .body-small;
+
+    &--small {
+      @extend .labels-small;
+    }
+  }
+
+  &--small {
+    background-color: var(--primary);
+    color: var(--primary-text2);
   }
 }
