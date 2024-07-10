@@ -22,6 +22,11 @@
       border-color: var(--secondary);
       outline-color: var(--secondary);
     }
+
+    &--error {
+      border-color: var(--support-danger);
+      outline-color: var(--support-danger);
+    }
   }
 
   &__btn {
