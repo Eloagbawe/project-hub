@@ -17,7 +17,7 @@ export const validateLoginInput = (input) => {
     validatedInput.email = {
       ...email,
       error: true,
-      message: 'Email is Required'
+      message: 'Email is required'
     }
   }
 
@@ -27,7 +27,7 @@ export const validateLoginInput = (input) => {
     validatedInput.password = {
       ...password,
       error: true,
-      message: 'Password is Required'
+      message: 'Password is required'
     }
   }
 
@@ -36,12 +36,83 @@ export const validateLoginInput = (input) => {
     validatedInput.email = {
       ...email,
       error: true,
-      message: 'Please Provide a valid email'
+      message: 'Please provide a valid email address'
     }
   }
 
   return validatedInput;
   
+}
+
+export const validateSignupInput = (input) => {
+  const { first_name, last_name, email, password, confirm_password } = input;
+
+  const validatedInput = {error: false, first_name, last_name, email, password, confirm_password};
+
+  if (!first_name.value) {
+    validatedInput.error = true;
+    validatedInput.first_name = {
+      ...first_name,
+      error: true,
+      message: 'First name is required'
+    }
+  }
+
+  if (!last_name.value) {
+    validatedInput.error = true;
+    validatedInput.last_name = {
+      ...last_name,
+      error: true,
+      message: 'Last name is required'
+    }
+  }
+
+  if (!email.value) {
+    validatedInput.error = true;
+    validatedInput.email = {
+      ...email,
+      error: true,
+      message: 'Email is required'
+    }
+  }
+
+  if (!password.value) {
+    validatedInput.error = true;
+    validatedInput.password = {
+      ...password,
+      error: true,
+      message: 'Password is required'
+    }
+  }
+
+  if (!confirm_password.value) {
+    validatedInput.error = true;
+    validatedInput.confirm_password = {
+      ...confirm_password,
+      error: true,
+      message: 'Confirm password is required'
+    }
+  }
+
+  if (password.value && (password.value !== confirm_password.value)) {
+    validatedInput.error = true;
+    validatedInput.confirm_password = {
+      ...confirm_password,
+      error: true,
+      message: 'Passwords don\'t match'
+    }
+  }
+
+  if (email.value && !validateEmailInput(email.value)) {
+    validatedInput.error = true;
+    validatedInput.email = {
+      ...email,
+      error: true,
+      message: 'Please provide a valid email address'
+    }
+  }
+
+  return validatedInput;
 }
 
 export const capitalizeInitials = (first_name, last_name) => {  
