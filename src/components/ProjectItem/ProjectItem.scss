@@ -1,0 +1,36 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.project {
+  cursor: pointer;
+  color: var(--primary-text);
+
+  &__name {
+    @extend .body-large;
+  }
+
+  &__timestamp {
+    @extend .body-small;
+    font-style: italic;
+  }
+
+  &__btn {
+    color: var(--primary-text);
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    @extend .labels-small;
+
+    &:hover {
+      font-weight: 500;
+    }
+  }
+
+  &__lead {
+    @extend .body-small;
+  }
+
+  &:hover {
+    background-color: var(--secondary-bg);
+  }
+}
