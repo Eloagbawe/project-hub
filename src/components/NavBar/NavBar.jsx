@@ -4,8 +4,19 @@ import Profile from "../Profile/Profile";
 import menuIcon from "../../assets/icons/menu.svg";
 import settingsIcon from "../../assets/icons/settings.svg";
 import MenuDropDown from "../Menu/Menu";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext";
+import { capitalizeInitials } from "../../utils";
 
 const NavBar = () => {
+  const { user, setUser } = useContext(UserContext);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUser(null);
+  };
+
   const generateHamburgerList = () => {
     const fullList = [
       {
@@ -20,17 +31,21 @@ const NavBar = () => {
         name: "Contact",
         link: "/",
       },
-      {
-        name: "Signup/Login",
-        link: "/login",
-      },
-      {
+    ];
+
+    if (user) {
+      fullList.push({
         name: "Logout",
         clickFn: () => {
-          console.log("logout");
+          handleLogout();
         },
-      },
-    ];
+      });
+    } else {
+      fullList.push({
+        name: "Signup/Login",
+        link: "/login",
+      });
+    }
     return fullList;
   };
 
@@ -39,7 +54,7 @@ const NavBar = () => {
       {
         name: "Logout",
         clickFn: () => {
-          console.log("logout");
+          handleLogout();
         },
       },
     ];
@@ -77,16 +92,22 @@ const NavBar = () => {
       </div>
 
       <div className="hidden md:flex items-center gap-4">
-        <MenuDropDown
+        {user && <MenuDropDown
           menuIcon={settingsIcon}
           itemList={generateSettingsList()}
-        />
+        />}
 
-        <Link to="/login" className="nav__link">
-          Log In/Sign Up
-        </Link>
+        {!user && (
+          <Link to="/login" className="nav__link">
+            Log In/Sign Up
+          </Link>
+        )}
         <div>
-          <Profile name="EI" />
+          {user && (
+            <Profile
+              name={capitalizeInitials(user.first_name, user.last_name)}
+            />
+          )}
         </div>
       </div>
     </div>
