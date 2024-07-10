@@ -6,6 +6,7 @@ import Signup from "./pages/Signup/Signup";
 import { useContext } from "react";
 import { AlertContext } from "./contexts/alertContext";
 import Alert from "./components/Alert/Alert";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   const { alert } = useContext(AlertContext);
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </BrowserRouter>
   );
