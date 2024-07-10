@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AlertContext } from "./contexts/alertContext";
 import Alert from "./components/Alert/Alert";
 import NotFound from "./pages/NotFound/NotFound";
+import ProjectList from "./pages/ProjectList/ProjectList";
 
 function App() {
   const { alert } = useContext(AlertContext);
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
+        <Route path="/projects" element={<ProjectList/>} />
         <Route path="*" element={<NotFound/>} />
       </Routes>
     </BrowserRouter>
