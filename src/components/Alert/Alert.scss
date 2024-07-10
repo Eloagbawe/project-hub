@@ -8,16 +8,6 @@
   z-index: 8;
   width: 100%;
 
-  &--error {
-    background-color: var(--support-danger);
-    color: var(--primary-btn-text);
-  }
-
-  &--success {
-    background-color: var(--support-success);
-    color: var(--primary-btn-text);
-  }
-
   &__container {
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
