@@ -23,7 +23,8 @@ body {
   --primary-bg: #135D66;
   --primary-btn-text: #ffffff;
   --secondary-bg: #F5F7F8;
-  --support-danger: #EA5455;
+  --support-danger: #EA5455; //#F44336;
+  --support-success: #219C90; //#7F9F80
   --logo: #31363F;
 }
 
@@ -77,5 +78,29 @@ body {
   @include text-style(0.7rem, 1rem);
   @include tablet {
     @include text-style(0.75rem, 1.125rem);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 25%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 0%;
   }
 }
