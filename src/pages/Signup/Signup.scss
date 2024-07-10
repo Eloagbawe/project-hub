@@ -11,17 +11,24 @@
   }
 
   &__label {
-    @extend .labels;
+    @extend .labels-small;
     font-weight: 500;
   }
 
   &__input, &__input-container {
     border-color: var(--secondary-light);
+    @extend .body-medium;
 
     &:focus {
       border-color: var(--secondary);
       outline-color: var(--secondary);
     }
+  
+    &--error {
+      border-color: var(--support-danger);
+      outline-color: var(--support-danger);
+    }
+  
   }
 
   &__btn {
