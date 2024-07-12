@@ -5,6 +5,8 @@
 .profile {
   background-color: var(--secondary-bg);
   color: var(--primary-text);
+  width: 2rem;
+  height: 2rem;
 
   &__text {
     font-weight: 500;
@@ -18,5 +20,7 @@
   &--small {
     background-color: var(--primary);
     color: var(--primary-text2);
+    width: 1.7rem;
+    height: 1.7rem;
   }
 }

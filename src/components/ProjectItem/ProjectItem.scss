@@ -28,6 +28,7 @@
 
   &__lead {
     @extend .body-small;
+    font-weight: 500;
   }
 
   &:hover {
