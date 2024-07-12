@@ -10,6 +10,7 @@ import { UserContext } from "../../contexts/userContext";
 import { Spinner } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { AlertContext } from "../../contexts/alertContext";
+import InputError from "../../components/InputError/InputError";
 
 const Login = () => {
   const { user, setUser } = useContext(UserContext);
@@ -62,13 +63,13 @@ const Login = () => {
       });
 
       localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", JSON.stringify(data.token));
+      localStorage.setItem("token", data.token);
       setUser(data.user);
       setLoginLoading(false);
       displayAlert({
         text: data.message,
       });
-      navigate("/");
+      navigate("/projects");
     } catch (err) {
       setLoginLoading(false);
       displayAlert({
@@ -87,7 +88,7 @@ const Login = () => {
 
   return (
     <MainLayout>
-      <section className="login my-4 md:my-8 xl:my-16 px-5 md:px-10">
+      <section className="login">
         <h2 className="login__heading">Login to your account</h2>
         <form className="login__form" onSubmit={handleLogin}>
           <div className="my-6 md:my-8 xl:my-10">
@@ -104,6 +105,7 @@ const Login = () => {
                 email.error && "login__input--error"
               } rounded-lg py-2 px-3 w-full md:w-6/12 xl:w-5/12`}
             />
+            {email.error && <InputError text={email?.message}/>}
           </div>
           <div className="my-6 md:my-8 xl:my-10">
             <label htmlFor="password" className="login__label block mb-1">
@@ -140,6 +142,7 @@ const Login = () => {
                 </button>
               )}
             </div>
+            {password.error && <InputError text={password?.message}/>}
           </div>
 
           <button className="login__btn rounded-full px-8 md:px-16 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center">

@@ -10,6 +10,7 @@ import { Spinner } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { AlertContext } from "../../contexts/alertContext";
 import { validateSignupInput } from "../../utils";
+import InputError from "../../components/InputError/InputError";
 
 const Signup = () => {
   const { user, setUser } = useContext(UserContext);
@@ -106,7 +107,7 @@ const Signup = () => {
 
   return (
     <MainLayout>
-      <section className="signup my-4 md:my-8 xl:my-16 px-5 md:px-10">
+      <section className="signup">
         <h2 className="signup__heading">Create an account</h2>
         <form
           className="signup__form md:flex gap-5 justify-between"
@@ -127,6 +128,7 @@ const Signup = () => {
                   first_name.error && "signup__input--error"
                 }`}
               />
+              {first_name.error && <InputError text={first_name?.message}/>}
             </div>
 
             <div className="my-6 md:my-8 xl:my-10">
@@ -143,6 +145,7 @@ const Signup = () => {
                   last_name.error && "signup__input--error"
                 }`}
               />
+              {last_name.error && <InputError text={last_name?.message}/>}
             </div>
 
             <div className="my-6 md:my-8 xl:my-10">
@@ -159,6 +162,7 @@ const Signup = () => {
                   email.error && "signup__input--error"
                 }`}
               />
+              {email.error && <InputError text={email?.message}/>}
             </div>
           </div>
           <div className="w-full md:w-5/12">
@@ -197,6 +201,7 @@ const Signup = () => {
                   </button>
                 )}
               </div>
+              {password.error && <InputError text={password?.message}/>}
             </div>
 
             <div className="my-6 md:my-8 xl:my-10">
@@ -243,6 +248,7 @@ const Signup = () => {
                   </button>
                 )}
               </div>
+              {confirm_password.error && <InputError text={confirm_password?.message}/>}
             </div>
 
             <button className="signup__btn rounded-full px-8 md:px-16 py-2 w-full my-2 md:mt-14 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center">

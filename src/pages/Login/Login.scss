@@ -32,7 +32,7 @@
 
   &__btn {
     background-color: var(--primary-bg);
-    color: var(--primary-btn-text);
+    color: var(--primary-label);
     font-weight: 500;
     @extend .labels;
   }
