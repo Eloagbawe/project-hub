@@ -1,0 +1,8 @@
+@import "../../index.scss";
+
+.error {
+  &__text {
+    color: var(--support-danger);
+    @extend .body-small;
+  }
+}
