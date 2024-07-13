@@ -2,9 +2,13 @@ import "./TaskItem.scss";
 import { capitalizeInitials } from "../../utils";
 import moreIcon from "../../assets/icons/more_horiz.svg";
 
-const TaskItem = ({ task, handleClick }) => {
+const TaskItem = ({ task, handleClick, innerRef, ...rest }) => {
   return (
-    <div className="task-item rounded-lg p-3 my-3 flex gap-1">
+    <div
+      className="task-item rounded-lg p-3 my-3 flex gap-1"
+      ref={innerRef}
+      {...rest}
+    >
       <div className="flex flex-col gap-2 justify-between w-[90%]">
         <div className="task-item__title">{task?.title}</div>
         <div className="task-item__user">

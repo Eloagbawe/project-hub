@@ -15,7 +15,6 @@ import { Spinner } from "@chakra-ui/react";
 import DeleteTask from "../DeleteTask/DeleteTask";
 import { ProjectContext } from "../../contexts/projectContext";
 
-
 const TaskDetails = ({ isOpen, onClose, task }) => {
   const { teamData, getTasks } = useContext(ProjectContext);
   const [title, setTitle] = useState("");
@@ -145,18 +144,18 @@ const TaskDetails = ({ isOpen, onClose, task }) => {
                   type="button"
                   className="task-details__btn task-details__btn--delete rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center"
                   onClick={() => {
-                    onClose()
-                    setDeleteModal(true)
+                    onClose();
+                    setDeleteModal(true);
                   }}
                 >
-                  Delete Task
+                  Delete
                 </button>
 
                 <button
                   type="submit"
                   className="task-details__btn rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center"
                 >
-                  Update Task
+                  Save
                   {updateTaskLoading && <Spinner size="xs" />}
                 </button>
               </div>
