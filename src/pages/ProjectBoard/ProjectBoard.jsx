@@ -1,21 +1,35 @@
 import "./ProjectBoard.scss";
 import ProjectLayout from "../../layouts/ProjectLayout/ProjectLayout";
 import { useParams } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import TaskBoard from "../../components/TaskBoard/TaskBoard";
 import { ProjectContext } from "../../contexts/projectContext";
+import AddTask from "../../components/AddTask/AddTask";
+import TaskDetails from "../../components/TaskDetails/TaskDetails";
 
 const ProjectBoard = () => {
-  const { projectLoading, setProjectId, teamLoading, tasksLoading } = useContext(ProjectContext);
+  const { projectLoading, setProjectId, teamLoading, tasksLoading } =
+    useContext(ProjectContext);
+  const [addTaskModal, setAddTaskModal] = useState(false);
+
+  const [taskDetailsModal, setTaskDetailsModal] = useState(false);
+  const [taskDetails, setTaskDetails] = useState(null);
 
   const { id } = useParams();
 
   useEffect(() => {
-    
     setProjectId(id);
-
   }, [id, setProjectId]);
+
+  const openTaskDetails = (task) => {
+    setTaskDetails(task);
+    setTaskDetailsModal(true);
+  };
+
+  const openAddTask = () => {
+    setAddTaskModal(true);
+  };
 
   return (
     <ProjectLayout>
@@ -26,7 +40,19 @@ const ProjectBoard = () => {
       ) : (
         <section>
           <div className="hidden xl:block">
-            <TaskBoard />
+            <TaskBoard
+              openAddTask={openAddTask}
+              openTaskDetails={openTaskDetails}
+            />
+            <AddTask
+              isOpen={addTaskModal}
+              onClose={() => setAddTaskModal(false)}
+            />
+            <TaskDetails
+              isOpen={taskDetailsModal}
+              onClose={() => setTaskDetailsModal(false)}
+              task={taskDetails}
+            />
           </div>
         </section>
       )}
