@@ -9,13 +9,14 @@ import { capitalizeInitials } from "../../utils";
 import Profile from "../../components/Profile/Profile";
 import { Divider } from "@chakra-ui/react";
 import ProjectActions from "../../components/ProjectActions/ProjectActions";
+import { ProjectContext } from "../../contexts/projectContext";
 
-const ProjectLayout = ({ project, children }) => {
+const ProjectLayout = ({ children }) => {
   const { pathname } = useLocation();
   const { id } = useParams();
   const { user, setUser } = useContext(UserContext);
+  const { project } = useContext(ProjectContext)
   const navigate = useNavigate();
-
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -53,9 +54,6 @@ const ProjectLayout = ({ project, children }) => {
               <p className="nav__sub-text">Project</p>
             </div>
             <div className="mt-1 cursor-pointer">
-              {/* <button onClick={() => setProjectPopover(true)}>
-                <img src={moreIcon} alt="project options" className="" />
-              </button> */}
               <ProjectActions/>
             </div>
           </div>
@@ -70,8 +68,9 @@ const ProjectLayout = ({ project, children }) => {
               Overview
             </Link>
             <Link
+              to={`/projects/${id}/board`}
               className={`nav__link block my-2 rounded-lg p-2  ${
-                pathname === `/projects/${id}/tasks` && "nav__link--active"
+                pathname === `/projects/${id}/board` && "nav__link--active"
               }`}
             >
               Task Board

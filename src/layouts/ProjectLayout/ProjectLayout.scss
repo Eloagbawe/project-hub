@@ -16,7 +16,7 @@
   .nav {
     border-right: 1px solid var(--divider);
     min-height: 90vh;
-
+    
     &__header {
       @extend .section-header;
       font-weight: 500;
