@@ -91,7 +91,7 @@ class ProjectHubApi {
   };
 
   deleteTask = (projectId, taskId) => {
-    return axios.put(`${this.api_url}/projects/${projectId}/tasks/${taskId}`, {
+    return axios.delete(`${this.api_url}/projects/${projectId}/tasks/${taskId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
