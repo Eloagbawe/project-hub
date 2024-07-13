@@ -1,0 +1,56 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.task-details {
+  &__content {
+    min-height: 40vh;
+  }
+
+  &__label {
+    @extend .labels-small;
+    font-weight: 500;
+  }
+
+  &__btn {
+    background-color: var(--primary-bg);
+    color: var(--primary-label);
+    font-weight: 500;
+    @extend .labels;
+
+    &--delete {
+      color: var(--support-danger);
+      background-color: transparent;
+    }
+  }
+
+
+  &__input {
+    width: 100%;
+    border-color: var(--secondary-light);
+    @extend .body-medium;
+
+    &:focus {
+      border-color: var(--secondary);
+      outline-color: var(--secondary);
+    }
+
+    &--error {
+      border-color: var(--support-danger);
+      outline-color: var(--support-danger);
+    }
+  }
+
+  &__select {
+    border-bottom-color: var(--secondary-light) !important;
+    &:focus {
+      border-bottom-color: var(--secondary) !important;
+    }
+
+  }
+
+  &__input--desc {
+    resize: none;
+    height: 20vh;
+  }
+}
