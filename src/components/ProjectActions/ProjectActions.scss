@@ -1,0 +1,27 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.popover {
+  &__content {
+    width: 10rem !important;
+  }
+
+  &__btn-container {
+    &:hover {
+      background-color: var(--secondary-bg);
+
+      .popover__btn {
+        font-weight: 500;
+      }
+    }
+  }
+
+  &__btn {
+    width: fit-content;
+
+    &:hover {
+      font-weight: 500;
+    }
+  }
+}
