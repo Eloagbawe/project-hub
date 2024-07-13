@@ -6,13 +6,11 @@ import Loader from "../../components/Loader/Loader";
 import { ProjectContext } from "../../contexts/projectContext";
 
 const ProjectOverview = () => {
-  const { project, projectLoading, setProjectId} = useContext(ProjectContext);
+  const { project, projectLoading, setProjectId } = useContext(ProjectContext);
   const { id } = useParams();
 
   useEffect(() => {
-
     setProjectId(id);
-
   }, [id, setProjectId]);
 
   return (
@@ -22,7 +20,7 @@ const ProjectOverview = () => {
           <Loader />
         </div>
       ) : (
-        <section className="project-overview">
+        <section className="project-overview mt-10">
           <div className="project-description my-8">
             {project?.description ? (
               <p className="project-description__text">
