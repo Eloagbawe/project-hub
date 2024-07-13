@@ -41,6 +41,15 @@ export const ProjectProvider = ({ children }) => {
     }
   };
 
+  const filterTasks = (tasks) => {
+    setTodoTasks(tasks?.filter((task) => task.status === "to do"));
+    setInProgressTasks(
+      tasks?.filter((task) => task.status === "in progress")
+    );
+    setInReviewTasks(tasks?.filter((task) => task.status === "in review"));
+    setDoneTasks(tasks?.filter((task) => task.status === "done"));
+  }
+
   const getTasks = async (projectId) => {
     setTasksLoading(true);
     try {
@@ -59,6 +68,12 @@ export const ProjectProvider = ({ children }) => {
       setTasksLoading(false);
     }
   };
+
+  const loadProject = (id) => {
+    getProject(id);
+    getTasks(id);
+    getTeam(id);
+  }
 
   useEffect(() => {
     if (projectId) {
@@ -85,6 +100,12 @@ export const ProjectProvider = ({ children }) => {
         inReviewTasks,
         doneTasks,
         getTasks,
+        filterTasks,
+        setTodoTasks,
+        setInProgressTasks,
+        setInReviewTasks,
+        setDoneTasks,
+        loadProject
       }}
     >
       {children}
