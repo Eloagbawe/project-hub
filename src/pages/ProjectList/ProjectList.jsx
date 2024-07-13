@@ -58,7 +58,9 @@ const ProjectList = () => {
             {projectList?.length > 0 ? (
               <>
                 {projectList.map((project) => (
-                  <ProjectItem key={project.id} project={project} />
+                  <Link key={project.id} to={`/projects/${project.id}/board`}>
+                    <ProjectItem project={project} />
+                  </Link>
                 ))}
               </>
             ) : (

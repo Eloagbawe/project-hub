@@ -25,6 +25,7 @@ body {
   --bg-main: #fdfdfd;
   --support-danger: #EA5455; //#F44336;
   --support-success: #219C90; //#7F9F80
+  --divider: #EDF1F5;
   --logo: #31363F;
 }
 
@@ -43,6 +44,13 @@ body {
   @include text-style(1.25rem, 1.75rem);
   @include tablet {
     @include text-style(1.5rem, 2rem);
+  }
+}
+
+.section-header {
+  @include text-style(1rem, 1.5rem);
+  @include tablet {
+    @include text-style(1.25rem, 1.75rem);
   }
 }
 
