@@ -1,0 +1,42 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.task-list {
+  color: var(--primary-text);
+
+  &--mobile {
+    border-top: 1px solid var(--divider);
+  }
+
+  &__card {
+    border-bottom: 1px solid var(--divider);
+  }
+
+  &__label {
+    @extend .body-small;
+    font-weight: 500;
+    color: var(--secondary);
+  }
+
+  &__text {
+    @extend .body-medium;
+
+    &--title {
+      width: 50%;
+    }
+  }
+
+  &__item, &__card {
+    cursor: pointer;
+    &:hover {
+      background-color: var(--secondary-bg);
+    }
+  }
+
+  &__btn {
+    background-color: var(--primary);
+    color: var(--primary-text2);
+  }
+
+}

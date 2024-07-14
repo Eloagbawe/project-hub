@@ -7,6 +7,7 @@ import TaskBoard from "../../components/TaskBoard/TaskBoard";
 import { ProjectContext } from "../../contexts/projectContext";
 import AddTask from "../../components/AddTask/AddTask";
 import TaskDetails from "../../components/TaskDetails/TaskDetails";
+import TaskList from "../../components/TaskList/TaskList";
 
 const ProjectBoard = () => {
   const { projectLoading, setProjectId, teamLoading, tasksLoading } =
@@ -44,16 +45,24 @@ const ProjectBoard = () => {
               openAddTask={openAddTask}
               openTaskDetails={openTaskDetails}
             />
-            <AddTask
-              isOpen={addTaskModal}
-              onClose={() => setAddTaskModal(false)}
-            />
-            <TaskDetails
-              isOpen={taskDetailsModal}
-              onClose={() => setTaskDetailsModal(false)}
-              task={taskDetails}
+          </div>
+
+          <div className="xl:hidden">
+            <TaskList
+              openAddTask={openAddTask}
+              openTaskDetails={openTaskDetails}
             />
           </div>
+
+          <AddTask
+            isOpen={addTaskModal}
+            onClose={() => setAddTaskModal(false)}
+          />
+          <TaskDetails
+            isOpen={taskDetailsModal}
+            onClose={() => setTaskDetailsModal(false)}
+            task={taskDetails}
+          />
         </section>
       )}
     </ProjectLayout>
