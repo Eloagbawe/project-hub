@@ -48,7 +48,7 @@ const AddTask = ({ isOpen, onClose }) => {
       await getTasks(teamData?.project_id);
       setAddTaskLoading(false);
       displayAlert({
-        text: 'Task updated successfully'
+        text: 'Task added successfully'
       })
       onClose();
     } catch (err) {
