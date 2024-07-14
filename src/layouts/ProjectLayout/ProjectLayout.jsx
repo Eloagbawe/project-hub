@@ -3,14 +3,14 @@ import Footer from "../../components/Footer/Footer";
 import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import settingsIcon from "../../assets/icons/settings.svg";
 import MenuDropDown from "../../components/Menu/Menu";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/userContext";
 import { capitalizeInitials } from "../../utils";
 import Profile from "../../components/Profile/Profile";
 import { Divider } from "@chakra-ui/react";
 import ProjectActions from "../../components/ProjectActions/ProjectActions";
 import { ProjectContext } from "../../contexts/projectContext";
-
+import { DeleteProject } from "../../components/DeleteConfirm/DeleteConfirm";
 import menuIcon from "../../assets/icons/menu.svg";
 
 const ProjectLayout = ({ children }) => {
@@ -19,6 +19,7 @@ const ProjectLayout = ({ children }) => {
   const { user, setUser } = useContext(UserContext);
   const { project } = useContext(ProjectContext);
   const navigate = useNavigate();
+  const [ deleteProject, setDeleteProject ] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -67,6 +68,7 @@ const ProjectLayout = ({ children }) => {
 
   return (
     <main className="project-layout">
+      <DeleteProject isOpen={deleteProject} onClose={() => setDeleteProject(false)}/>
       <div className="flex">
         <section className="nav xl:w-[20%] p-6 hidden xl:block">
           <div className="project-layout__logo pl-2">
@@ -80,9 +82,11 @@ const ProjectLayout = ({ children }) => {
               <h3 className="nav__header break-words">{project?.title}</h3>
               <p className="nav__sub-text">Project</p>
             </div>
-            <div className="mt-1 cursor-pointer">
-              <ProjectActions />
-            </div>
+            {(project?.manager_id === user?.id) && <div className="mt-1 cursor-pointer">
+              <ProjectActions openDeleteProject={() => {
+                setDeleteProject(true)
+              }}/>
+            </div>}
           </div>
 
           <div className="nav__links">
