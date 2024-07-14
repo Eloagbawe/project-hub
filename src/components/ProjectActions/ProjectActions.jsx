@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { ProjectContext } from "../../contexts/projectContext";
 import { useNavigate } from "react-router-dom";
 
-const ProjectActions = () => {
+const ProjectActions = ({ openDeleteProject }) => {
   const { project } = useContext(ProjectContext);
   const navigate = useNavigate();
 
@@ -29,8 +29,11 @@ const ProjectActions = () => {
 
         <PopoverContent className="popover__content px-2 pb-2">
           {/* <PopoverCloseButton /> */}
-          <div className="mt-3 popover__btn-container rounded-lg px-2">
+          <div className="my-3 popover__btn-container rounded-lg px-2">
             <button className="popover__btn" onClick={handleEdit}>Edit</button>
+          </div>
+          <div className="my-3 popover__btn-container rounded-lg px-2">
+            <button className="popover__btn" onClick={openDeleteProject}>Delete Project</button>
           </div>
         </PopoverContent>
       </Popover>
