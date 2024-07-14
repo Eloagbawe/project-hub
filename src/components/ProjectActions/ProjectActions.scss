@@ -9,8 +9,6 @@
 
   &__btn-container {
     &:hover {
-      background-color: var(--secondary-bg);
-
       .popover__btn {
         font-weight: 500;
       }
