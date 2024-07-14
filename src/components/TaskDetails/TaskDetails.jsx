@@ -14,9 +14,11 @@ import InputError from "../InputError/InputError";
 import { Spinner } from "@chakra-ui/react";
 import DeleteTask from "../DeleteTask/DeleteTask";
 import { ProjectContext } from "../../contexts/projectContext";
+import { AlertContext } from "../../contexts/alertContext";
 
 const TaskDetails = ({ isOpen, onClose, task }) => {
   const { teamData, getTasks } = useContext(ProjectContext);
+  const { displayAlert } = useContext(AlertContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [titleError, setTitleError] = useState(false);
@@ -48,8 +50,16 @@ const TaskDetails = ({ isOpen, onClose, task }) => {
       await getTasks(teamData?.project_id);
       setUpdateTaskLoading(false);
       onClose();
+      displayAlert({
+        text: 'Task updated successfully'
+      })
     } catch (err) {
       console.error(err);
+      setUpdateTaskLoading(false);
+      displayAlert({
+        text: 'An error occurred while updating task',
+        status: "error",
+      });
     }
   };
 
@@ -142,7 +152,7 @@ const TaskDetails = ({ isOpen, onClose, task }) => {
               <div className="mt-10 flex flex-wrap gap-3 justify-between">
                 <button
                   type="button"
-                  className="task-details__btn task-details__btn--delete rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center"
+                  className="task-details__btn task-details__btn--delete rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center order-3 md:order-1"
                   onClick={() => {
                     onClose();
                     setDeleteModal(true);
@@ -153,7 +163,7 @@ const TaskDetails = ({ isOpen, onClose, task }) => {
 
                 <button
                   type="submit"
-                  className="task-details__btn rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center"
+                  className="task-details__btn rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center order-2"
                 >
                   Save
                   {updateTaskLoading && <Spinner size="xs" />}

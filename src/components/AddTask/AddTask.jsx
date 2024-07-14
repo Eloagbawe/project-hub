@@ -13,9 +13,12 @@ import projectHubApi from "../../utils/projectHubApi";
 import InputError from "../InputError/InputError";
 import { Spinner } from "@chakra-ui/react";
 import { ProjectContext } from "../../contexts/projectContext";
+import { AlertContext } from "../../contexts/alertContext";
+
 
 const AddTask = ({ isOpen, onClose }) => {
   const { teamData, getTasks } = useContext(ProjectContext);
+  const { displayAlert } = useContext(AlertContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [titleError, setTitleError] = useState(false);
@@ -44,9 +47,17 @@ const AddTask = ({ isOpen, onClose }) => {
       await projectHubApi.addTask(teamData?.project_id, newTask);
       await getTasks(teamData?.project_id);
       setAddTaskLoading(false);
+      displayAlert({
+        text: 'Task updated successfully'
+      })
       onClose();
     } catch (err) {
       console.error(err);
+      setAddTaskLoading(false);
+      displayAlert({
+        text: 'An error occurred while adding task',
+        status: "error",
+      });
     }
   };
 

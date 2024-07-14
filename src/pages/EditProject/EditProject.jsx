@@ -7,10 +7,14 @@ import Loader from "../../components/Loader/Loader";
 import { Spinner } from "@chakra-ui/react";
 import InputError from "../../components/InputError/InputError";
 import projectHubApi from "../../utils/projectHubApi";
+import { AlertContext } from "../../contexts/alertContext";
+
 
 const EditProject = () => {
   const { project, projectLoading, setProjectId, teamData, loadProject } =
     useContext(ProjectContext);
+  const { displayAlert } = useContext(AlertContext);
+
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState("");
   const [description, setDescription] = useState("");
@@ -47,12 +51,19 @@ const EditProject = () => {
     setUpdateLoading(true);
 
     try {
-      await projectHubApi.updateProject(project.id, payload);
+      const { data } = await projectHubApi.updateProject(project.id, payload);
       setUpdateLoading(false);
       loadProject(project.id);
+      displayAlert({
+        text: data.message,
+      });
       navigate(`/projects/${id}/overview`);
     } catch (err) {
       console.log(err);
+      displayAlert({
+        text: 'An error occurred while updating the project',
+        status: "error",
+      });
       setUpdateLoading(false);
     }
   };

@@ -11,9 +11,12 @@ import { useState, useContext } from "react";
 import { Spinner } from "@chakra-ui/react";
 import projectHubApi from "../../utils/projectHubApi";
 import { ProjectContext } from "../../contexts/projectContext";
+import { AlertContext } from "../../contexts/alertContext";
+
 
 const DeleteTask = ({ isOpen, onClose, task }) => {
   const { getTasks, project } = useContext(ProjectContext);
+  const { displayAlert } = useContext(AlertContext);
 
   const [deleteTaskLoading, setDeleteTaskLoading] = useState(false);
 
@@ -24,9 +27,18 @@ const DeleteTask = ({ isOpen, onClose, task }) => {
       await projectHubApi.deleteTask(project.id, task.id);
       await getTasks(project.id);
       setDeleteTaskLoading(false);
+      displayAlert({
+        text: 'Task deleted successfully'
+      })
       onClose();
     } catch (err) {
       console.error(err);
+      setDeleteTaskLoading(false);
+      displayAlert({
+        text: 'An error occurred while deleting task',
+        status: "error",
+      });
+
     }
   };
 
