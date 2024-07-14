@@ -55,7 +55,10 @@ const ProjectTeam = () => {
         <section className="project-team mt-10">
           <RemoveMember
             isOpen={removeTeamMember}
-            onClose={() => setRemoveTeamMember(false)}
+            onClose={() => {
+              setRemoveTeamMember(false)
+              setMemberToRemove(null)
+            }}
             member={memberToRemove}
           />
           {project?.manager_id === user?.id && (
