@@ -1,0 +1,29 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.main-layout {
+  &__nav, &__content {
+    padding: 1rem;
+
+
+    @include tablet {
+      @include x-align--tab;
+    }
+  
+    @include desktop {
+      padding-left: 0;
+      padding-right: 0;
+      @include x-align--desktop;
+    }
+
+    @include large-desktop {
+      @include x-align--large-desktop;
+    }
+  }
+
+  &__content {
+    min-height: 65vh;
+  }
+
+}

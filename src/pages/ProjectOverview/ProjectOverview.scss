@@ -1,0 +1,15 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+
+.project-overview {
+
+  .project-description {
+    @extend .body-large;
+
+    &__none {
+      font-style: italic;
+    }
+  }
+}

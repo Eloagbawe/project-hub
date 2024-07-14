@@ -1,0 +1,22 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.not-found {
+
+  &__text {
+    color: var(--primary-text);
+    font-weight: 500;
+    @extend .body-large;
+  }
+
+  &__link {
+    @extend .link-text;
+    color: var(--primary);
+    transition: all .2s ease-in;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+}

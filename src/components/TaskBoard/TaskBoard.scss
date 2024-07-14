@@ -1,0 +1,22 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.task-board {
+  color: var(--primary-text);
+
+  &__item {
+    background-color: var(--secondary-bg);
+    min-height: 70vh;
+    width: 25%;
+  }
+
+  &__btn {
+    @extend .labels-small;
+  }
+  &__label {
+    @extend .labels;
+    font-weight: 500;
+  }
+
+}

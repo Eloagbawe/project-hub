@@ -1,0 +1,24 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.nav {
+  height: 2rem;
+
+  .logo {
+    font-family: 'Karla', sans-serif;
+    color: var(--logo);
+  }
+
+  &__link {
+    font-size: 0.9rem;
+    color: var(--primary-text);
+    @extend .link-text;
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      font-weight: 500;
+      opacity: 0.8;
+    }
+  }
+}

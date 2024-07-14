@@ -1,0 +1,47 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.login {
+  color: var(--primary-text);
+
+  &__heading {
+    @extend .sub-header;
+    font-weight: 600;
+  }
+
+  &__label {
+    @extend .labels-small;
+    font-weight: 500;
+  }
+
+  &__input, &__input-container {
+    border-color: var(--secondary-light);
+    @extend .body-medium;
+
+    &:focus {
+      border-color: var(--secondary);
+      outline-color: var(--secondary);
+    }
+
+    &--error {
+      border-color: var(--support-danger);
+      outline-color: var(--support-danger);
+    }
+  }
+
+  &__btn {
+    background-color: var(--primary-bg);
+    color: var(--primary-label);
+    font-weight: 500;
+    @extend .labels;
+  }
+
+  &__text {
+    @extend .body-medium;
+
+    &--link {
+      font-weight: 500;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.add-member {
+  &__content {
+    min-height: 40vh;
+  }
+
+  &__search {
+    background-color: transparent;
+    @extend .body-medium;
+  }
+
+  &__user {
+    cursor: pointer;
+    &:hover {
+      background-color: var(--secondary-bg);
+    }
+
+    &--selected {
+      font-weight: bold;
+      background-color: var(--secondary-bg);
+    }
+
+  }
+
+  &__email {
+    @extend .body-small;
+  }
+}
