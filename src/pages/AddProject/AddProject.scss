@@ -1,0 +1,71 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.add-project {
+  color: var(--primary-text);
+
+  &__heading {
+    @extend .sub-header;
+    font-weight: 600;
+  }
+
+  &__label, &__manage {
+    @extend .labels-small;
+  }
+
+  &__label {
+    font-weight: 500;
+  }
+
+  &__manage {
+    border: 2px solid var(--primary-text);
+  
+    &:hover {
+      font-weight: 500;
+    }
+  }
+
+  &__input {
+    border-color: var(--secondary-light);
+    background-color:  transparent;
+    @extend .body-medium;
+
+    &:focus {
+      border-color: var(--secondary);
+      outline-color: var(--secondary);
+    }
+
+    &--error {
+      border-color: var(--support-danger);
+      outline-color: var(--support-danger);
+    }
+
+    &--textarea {
+      resize: none;
+      height: 30vh;
+    }
+  }
+
+  &__btn {
+    @extend .labels-small;
+    color: var(--primary-text2);
+    transition: all .2s ease-in-out;
+    &--save {
+      background-color: var(--primary);
+    }
+
+    &--team {
+      background-color: var(--primary-text);
+    }
+  }
+
+  &__member {
+    margin-left: -0.3rem;
+  }
+
+
+  &__team {
+    @extend .body-small;
+  }
+}

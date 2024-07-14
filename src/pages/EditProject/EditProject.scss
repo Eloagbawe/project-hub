@@ -1,0 +1,41 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.edit-project {
+  color: var(--primary-text);
+
+  &__heading {
+    @extend .section-header;
+    font-weight: 500;
+  }
+
+  &__input {
+    border-color: var(--secondary-light);
+    @extend .body-medium;
+
+    &:focus {
+      border-color: var(--secondary);
+      outline-color: var(--secondary);
+    }
+
+    &--error {
+      border-color: var(--support-danger);
+      outline-color: var(--support-danger);
+    }
+
+    &--desc {
+      resize: none;
+      min-height: 30vh;
+    }
+  }
+
+  &__btn {
+    @extend .labels-small;
+
+    &--save {
+      background-color: var(--primary-bg);
+      color: var(--primary-text2);
+    }
+  }
+}

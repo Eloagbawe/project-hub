@@ -1,0 +1,12 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.project-team {
+  color: var(--primary-text);
+
+  &__text {
+    @extend .body-medium;
+  }
+
+}

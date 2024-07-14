@@ -1,0 +1,21 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.delete-task {
+  color: var(--primary-text);
+
+  &__btn {    
+    @extend .labels;
+    &--delete {
+      background-color: var(--support-danger);
+      color: var(--primary-label);
+      font-weight: 500;
+    }
+  }
+
+  &__text {
+    @extend .body-large;
+  }
+
+}
