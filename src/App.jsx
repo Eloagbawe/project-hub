@@ -12,6 +12,7 @@ import AddProject from "./pages/AddProject/AddProject";
 import ProjectOverview from "./pages/ProjectOverview/ProjectOverview";
 import ProjectBoard from "./pages/ProjectBoard/ProjectBoard";
 import EditProject from "./pages/EditProject/EditProject";
+import ProjectTeam from "./pages/ProjectTeam/ProjectTeam";
 
 function App() {
   const { alert } = useContext(AlertContext);
@@ -28,6 +29,7 @@ function App() {
         <Route path="/projects/:id/overview" element={<ProjectOverview/>} />
         <Route path="/projects/:id/board" element={<ProjectBoard/>} />
         <Route path="/projects/:id/edit" element={<EditProject/>} />
+        <Route path="/projects/:id/team" element={<ProjectTeam/>} />
         <Route path="*" element={<NotFound/>} />
       </Routes>
     </BrowserRouter>
