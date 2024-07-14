@@ -10,9 +10,16 @@ const NotFound = () => {
           <p className="not-found__text my-2">
             The page you&apos;re looking for does not exist.
           </p>
-          <Link to="/" className="not-found__link">
-            Back to home
-          </Link>
+          <p>
+            <Link to="/" className="not-found__link">
+              Back to home
+            </Link>
+          </p>
+          <p>
+            <Link to="/projects" className="not-found__link">
+              Back to Projects page
+            </Link>
+          </p>
         </div>
       </section>
     </MainLayout>
