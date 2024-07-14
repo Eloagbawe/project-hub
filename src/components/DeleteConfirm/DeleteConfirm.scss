@@ -2,7 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 @import "../../index.scss";
 
-.delete-project {
+.delete-task, .delete-project, .remove-member {
   color: var(--primary-text);
 
   &__btn {    
