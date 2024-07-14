@@ -13,13 +13,21 @@ class ProjectHubApi {
     return axios.post(`${this.api_url}/auth/signup`, payload);
   };
 
-  getUsers = (query) => {
+  getUsers = (query, projectId) => {
+    if (projectId) {
+      return axios.get(`${this.api_url}/users?query=${query}&project_id=${projectId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+    }
 
     return axios.get(`${this.api_url}/users?query=${query}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
+    
   };
 
   getProjects = () => {
@@ -53,6 +61,22 @@ class ProjectHubApi {
       },
     });
   };
+
+  removeTeamMember = (projectId, userId) => {
+    return axios.delete(`${this.api_url}/projects/${projectId}/team/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+  }
+
+  deleteProject = (id) => {
+    return axios.delete(`${this.api_url}/projects/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+  }
 
   getTasks = (projectId) => {
     return axios.get(`${this.api_url}/projects/${projectId}/tasks`, {

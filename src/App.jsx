@@ -1,5 +1,5 @@
 import "./App.scss";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
@@ -18,7 +18,7 @@ function App() {
   const { alert } = useContext(AlertContext);
 
   return (
-    <BrowserRouter>
+    <>
       {alert && <Alert text={alert.text} status={alert.status} end={alert.end}/>}
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -30,9 +30,10 @@ function App() {
         <Route path="/projects/:id/board" element={<ProjectBoard/>} />
         <Route path="/projects/:id/edit" element={<EditProject/>} />
         <Route path="/projects/:id/team" element={<ProjectTeam/>} />
+        <Route path="/not-found" element={<NotFound/>} />
         <Route path="*" element={<NotFound/>} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 

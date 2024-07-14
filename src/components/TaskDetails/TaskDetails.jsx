@@ -12,7 +12,7 @@ import { useState, useEffect, useContext } from "react";
 import projectHubApi from "../../utils/projectHubApi";
 import InputError from "../InputError/InputError";
 import { Spinner } from "@chakra-ui/react";
-import DeleteTask from "../DeleteTask/DeleteTask";
+import DeleteTask from "../DeleteConfirm/DeleteConfirm";
 import { ProjectContext } from "../../contexts/projectContext";
 import { AlertContext } from "../../contexts/alertContext";
 

@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import projectHubApi from "../utils/projectHubApi";
 
 export const ProjectContext = createContext(null);
@@ -16,6 +17,7 @@ export const ProjectProvider = ({ children }) => {
   const [inProgressTasks, setInProgressTasks] = useState([]);
   const [inReviewTasks, setInReviewTasks] = useState([]);
   const [doneTasks, setDoneTasks] = useState([]);
+  const navigate = useNavigate();
 
   const getProject = async (id) => {
     setProjectLoading(true);
@@ -24,7 +26,9 @@ export const ProjectProvider = ({ children }) => {
       setProjectLoading(false);
       setProject(data);
     } catch (err) {
-      console.error(err);
+      if (err.response.status === 404) {
+        navigate("/not-found");
+      }
       setProjectLoading(false);
     }
   };
@@ -43,12 +47,10 @@ export const ProjectProvider = ({ children }) => {
 
   const filterTasks = (tasks) => {
     setTodoTasks(tasks?.filter((task) => task.status === "to do"));
-    setInProgressTasks(
-      tasks?.filter((task) => task.status === "in progress")
-    );
+    setInProgressTasks(tasks?.filter((task) => task.status === "in progress"));
     setInReviewTasks(tasks?.filter((task) => task.status === "in review"));
     setDoneTasks(tasks?.filter((task) => task.status === "done"));
-  }
+  };
 
   const getTasks = async (projectId) => {
     setTasksLoading(true);
@@ -73,7 +75,7 @@ export const ProjectProvider = ({ children }) => {
     getProject(id);
     getTasks(id);
     getTeam(id);
-  }
+  };
 
   useEffect(() => {
     if (projectId) {
@@ -81,6 +83,8 @@ export const ProjectProvider = ({ children }) => {
       getTasks(projectId);
       getTeam(projectId);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
 
   return (
@@ -105,7 +109,7 @@ export const ProjectProvider = ({ children }) => {
         setInProgressTasks,
         setInReviewTasks,
         setDoneTasks,
-        loadProject
+        loadProject,
       }}
     >
       {children}

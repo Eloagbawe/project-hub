@@ -6,17 +6,20 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { UserProvider } from "./contexts/userContext";
 import { AlertProvider } from "./contexts/alertContext";
 import { ProjectProvider } from "./contexts/projectContext.jsx";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider>
-      <UserProvider>
-        <ProjectProvider>
+      <BrowserRouter>
+        <UserProvider>
           <AlertProvider>
-            <App />
+            <ProjectProvider>
+              <App />
+            </ProjectProvider>
           </AlertProvider>
-        </ProjectProvider>
-      </UserProvider>
+        </UserProvider>
+      </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>
 );
