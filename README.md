@@ -41,6 +41,8 @@ In today's fast-paced business environment, project managers and teams often fac
   - sass
   - tailwindcss
   - axios
+  - chakra-ui
+  - @hello-pangea/dnd
 - Server libraries:
   - knex
   - express
@@ -66,10 +68,10 @@ In today's fast-paced business environment, project managers and teams often fac
 - 404 page
 
 **Installation Instructions**
-- Clone the project from github
-- Run npm install to install dependencies
-- Create a .env file at the root of the folder and add the VITE_API_URL variable (from the backend) as specified in .env.example
-- - Run app: npm run dev
+- Clone the project from github: git clone https://github.com/Eloagbawe/project-hub.git
+- Run npm install to install dependencies: npm install
+- Create a .env file at the root of the folder and add the VITE_API_URL variable (api url from the backend) as specified in .env.example
+- Run app: npm run dev
 
 ### Visuals
 
