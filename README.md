@@ -73,6 +73,9 @@ In today's fast-paced business environment, project managers and teams often fac
 - Create a .env file at the root of the folder and add the VITE_API_URL variable (api url from the backend) as specified in .env.example
 - Run app: npm run dev
 
+**Hosted url**
+- https://projecthub-main.netlify.app
+
 ### Visuals
 
 ![](./visuals/visuals_1.png)
