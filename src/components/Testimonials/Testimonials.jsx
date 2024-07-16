@@ -38,7 +38,7 @@ const Testimonials = () => {
             <p className="testimonials__quote mb-3">
               &quot;ProjectHub has streamlined our workflow and increased
               productivity. We can&apos;t imagine managing projects without
-              it..&quot;
+              it.&quot;
             </p>
             <p className="testimonials__user">David W.</p>
           </CardBody>
