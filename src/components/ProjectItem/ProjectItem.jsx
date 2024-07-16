@@ -6,18 +6,32 @@ import moment from "moment";
 
 const ProjectItem = ({ project }) => {
   return (
-    <div className="project rounded-sm">
-      <div className="project__content px-2 py-4 flex flex-wrap gap-3 justify-between align-center">
-        <div className="w-full md:w-fit">
+    <div className="project rounded-sm py-2">
+      <div className="project__content p-2 flex flex-wrap gap-3 justify-between items-center">
+        <div className="">
+          <p className="project__content__label mb-1">TITLE</p>
           <p className="project__name">{project?.title}</p>
         </div>
-        <div className="project__details flex flex-wrap gap-5 items-center">
+        <div className="">
+          <p className="project__content__label mb-1">MANAGER</p>
           <div className="project__lead-container flex gap-1 items-center">
-            <Profile name={capitalizeInitials(project?.manager_first_name, project?.manager_last_name)} small={true} />
-            <p className="project__lead">{project?.manager_first_name} {project?.manager_last_name}</p>
+            <Profile
+              name={capitalizeInitials(
+                project?.manager_first_name,
+                project?.manager_last_name
+              )}
+              small={true}
+            />
+            <p className="project__lead">
+              {project?.manager_first_name} {project?.manager_last_name}
+            </p>
           </div>
-          <p className="project__timestamp">Last Updated: {moment(project.updated_at).format('MMMM Do YYYY')}</p>
         </div>
+      </div>
+      <div className="project__details p-2">
+        <p className="project__timestamp">
+          Last Updated: {moment(project.updated_at).format("MMMM Do YYYY")}
+        </p>
       </div>
 
       <Divider />
