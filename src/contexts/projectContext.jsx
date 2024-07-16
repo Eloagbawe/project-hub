@@ -1,6 +1,8 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import projectHubApi from "../utils/projectHubApi";
+import { AlertContext } from "./alertContext";
+import { UserContext } from "./userContext";
 
 export const ProjectContext = createContext(null);
 
@@ -17,6 +19,9 @@ export const ProjectProvider = ({ children }) => {
   const [inProgressTasks, setInProgressTasks] = useState([]);
   const [inReviewTasks, setInReviewTasks] = useState([]);
   const [doneTasks, setDoneTasks] = useState([]);
+  const { displayAlert } = useContext(AlertContext);
+  const { logoutUser } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   const getProject = async (id) => {
@@ -28,6 +33,14 @@ export const ProjectProvider = ({ children }) => {
     } catch (err) {
       if (err.response.status === 404) {
         navigate("/not-found");
+      }
+      if (err.response.status === 401) {
+        displayAlert({
+          text: 'Session Invalid, Please Log in',
+          status: 'error'
+        })
+        logoutUser();
+        navigate('/login')
       }
       setProjectLoading(false);
     }
