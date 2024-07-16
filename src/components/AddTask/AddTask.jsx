@@ -26,6 +26,15 @@ const AddTask = ({ isOpen, onClose }) => {
   const [assignee, setAssignee] = useState("");
   const [status, setStatus] = useState("to do");
 
+  const closeAddTask = () => {
+    setTitle("");
+    setDescription("");
+    setTitleError(false);
+    setAssignee("");
+    setStatus("to do");
+    onClose();
+  }
+
   const handleAddTask = async (e) => {
     e.preventDefault();
 
@@ -50,7 +59,7 @@ const AddTask = ({ isOpen, onClose }) => {
       displayAlert({
         text: 'Task added successfully'
       })
-      onClose();
+      closeAddTask();
     } catch (err) {
       console.error(err);
       setAddTaskLoading(false);
@@ -62,7 +71,7 @@ const AddTask = ({ isOpen, onClose }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={closeAddTask}>
       <ModalOverlay />
       <ModalContent className="add-task__content mx-4 pb-8">
         <ModalHeader className="mt-4">Add Task</ModalHeader>
