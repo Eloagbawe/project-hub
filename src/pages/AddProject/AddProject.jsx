@@ -13,7 +13,7 @@ import { AlertContext } from "../../contexts/alertContext";
 import { Spinner } from "@chakra-ui/react";
 
 const AddProject = () => {
-  const { user } = useContext(UserContext);
+  const { user, logoutUser } = useContext(UserContext);
   const { displayAlert } = useContext(AlertContext);
   const [addMemberModal, setAddMemberModal] = useState(false);
   const [displayMembersModal, setDisplayMembersModal] = useState(false);
@@ -29,7 +29,7 @@ const AddProject = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/");
+      navigate("/login");
     }
   }, [user, navigate]);
 
@@ -54,6 +54,14 @@ const AddProject = () => {
       setUserList(data);
     } catch (err) {
       console.error(err);
+      if (err.response.status === 401) {
+        displayAlert({
+          text: 'Session Invalid, Please Log in',
+          status: 'error'
+        })
+        logoutUser();
+        navigate('/login')
+      }
     }
   };
 
@@ -91,10 +99,19 @@ const AddProject = () => {
       navigate("/projects");
     } catch (err) {
       setAddProjectLoading(false);
-      displayAlert({
-        text: err.response?.data?.message,
-        status: "error",
-      });
+      if (err.response.status === 401) {
+        displayAlert({
+          text: 'Session Invalid, Please Log in',
+          status: 'error'
+        })
+        logoutUser();
+        navigate('/login')
+      } else {
+        displayAlert({
+          text: err.response?.data?.message,
+          status: "error",
+        });
+      }
       console.error(err);
     }
   };

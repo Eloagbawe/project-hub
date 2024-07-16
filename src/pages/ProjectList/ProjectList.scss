@@ -10,18 +10,33 @@
     font-weight: 600;
   }
 
-  
+  .project {
+    &__name {
+      @extend .body-large;
+      word-break: break-all;
+    }
+    &__manager {
+      @extend .body-small;
+      font-weight: 500;
+    }
+
+    &__item {
+      cursor: pointer;
+      &:hover {
+        background-color: var(--secondary-bg);
+      }
+    }
+  }
 
   &__add-btn {
     background-color: var(--primary-bg);
     color: var(--primary-text2);
     font-weight: 500;
     @extend .labels;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
       background-color: var(--primary);
     }
   }
-
 }
