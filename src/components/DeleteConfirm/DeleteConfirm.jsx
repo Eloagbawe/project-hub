@@ -57,14 +57,14 @@ const DeleteTask = ({ isOpen, onClose, task }) => {
           <div className="mt-10 flex flex-wrap gap-3 justify-between">
             <button
               type="button"
-              className="delete-task__btn delete-task__btn--cancel rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center"
+              className="delete-task__btn delete-task__btn--cancel rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center order-3 md:order-1"
               onClick={() => onClose()}
             >
               CANCEL
             </button>
             <button
               type="button"
-              className="delete-task__btn delete-task__btn--delete rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center"
+              className="delete-task__btn delete-task__btn--delete rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center order-2"
               onClick={() => handleDeleteTask()}
             >
               Delete Task
@@ -129,14 +129,14 @@ export const DeleteProject = ({ isOpen, onClose }) => {
           <div className="mt-10 flex flex-wrap gap-3 justify-between">
             <button
               type="button"
-              className="delete-project__btn delete-project__btn--cancel rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center"
+              className="delete-project__btn delete-project__btn--cancel rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center order-3 md:order-1"
               onClick={() => onClose()}
             >
               CANCEL
             </button>
             <button
               type="button"
-              className="delete-project__btn delete-project__btn--delete rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center"
+              className="delete-project__btn delete-project__btn--delete rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center order-2"
               onClick={() => handleDeleteProject()}
             >
               Delete Project
@@ -198,14 +198,14 @@ export const RemoveMember = ({ isOpen, onClose, member }) => {
           <div className="mt-10 flex flex-wrap gap-3 justify-between">
             <button
               type="button"
-              className="remove-member__btn remove-member__btn--cancel rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center"
+              className="remove-member__btn remove-member__btn--cancel rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center order-3 md:order-1"
               onClick={() => onClose()}
             >
               CANCEL
             </button>
             <button
               type="button"
-              className="remove-member__btn remove-member__btn--delete rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center"
+              className="remove-member__btn remove-member__btn--delete rounded-full px-8 py-2 w-full my-2 md:w-fit hover:opacity-90 transition duration-500 flex gap-2 items-center justify-center order-2"
               onClick={() => handleRemoveMember()}
             >
               Remove team member
