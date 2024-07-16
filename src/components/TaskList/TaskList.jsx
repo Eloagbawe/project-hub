@@ -33,8 +33,8 @@ const TaskList = ({ openTaskDetails, openAddTask }) => {
               <p className="task-list__label">ASSIGNED</p>
               <p className="task-list__text">
                 {task?.user
-                  ? `${tasksData.tasks[0].user?.first_name}
-                ${tasksData.tasks[0].user?.last_name}`
+                  ? `${task.user?.first_name}
+                ${task.user?.last_name}`
                   : "Unassigned"}
               </p>
             </div>

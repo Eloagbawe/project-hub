@@ -10,6 +10,10 @@
   &__search {
     background-color: transparent;
     @extend .body-medium;
+
+    &:focus {
+      font-size: 1rem;
+    }
   }
 
   &__user {

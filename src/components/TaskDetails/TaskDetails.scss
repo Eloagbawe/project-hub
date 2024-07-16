@@ -33,6 +33,7 @@
     &:focus {
       border-color: var(--secondary);
       outline-color: var(--secondary);
+      font-size: 1rem;
     }
 
     &--error {
