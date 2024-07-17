@@ -30,4 +30,46 @@
       @include text-style(1.5rem, 1.375rem);
     }
   }
+
+  &__header {
+    background: url("../../assets/images/background.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+  }
+
+  &__tagline {
+    background-color: var(--logo);
+    color: var(--primary-text2);
+  }
+
+  &__sub-header {
+    font-weight: 500;
+    @include text-style(2rem, 3rem);
+
+    @include tablet {
+      @include text-style(3rem, 4rem);
+    }
+
+    @include large-desktop {
+      @include text-style(3.5rem, 5rem);
+    }
+  }
+
+  .tagline {
+    // width: 30%;
+    &__heading {
+      @extend .sub-header;
+      font-weight: 500;
+    }
+    &__text {
+      @extend .body-medium;
+      width: 15rem;
+    }
+
+    &__line {
+      border-top: 1px solid var(--primary);
+      width: 30%;
+    }
+  }
 }

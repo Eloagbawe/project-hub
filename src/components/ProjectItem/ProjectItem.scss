@@ -6,8 +6,14 @@
   cursor: pointer;
   color: var(--primary-text);
 
+  &__content__label {
+    @extend .labels-small;
+    font-weight: 500;
+  }
+
   &__name {
     @extend .body-large;
+    word-break: break-all;
   }
 
   &__timestamp {

@@ -1,0 +1,19 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@import "../../index.scss";
+
+.testimonials {
+  color: var(--primary-text);
+
+  &__quote {
+    @extend .body-medium;
+
+  }
+
+  &__user {
+    @extend .body-small;
+    font-weight: 500;
+    color: var(--primary);
+
+  }
+}

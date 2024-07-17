@@ -3,9 +3,8 @@
 @import "../../index.scss";
 
 .main-layout {
-  &__nav, &__content {
+  &__nav, &__content--x-align {
     padding: 1rem;
-
 
     @include tablet {
       @include x-align--tab;
@@ -25,5 +24,4 @@
   &__content {
     min-height: 65vh;
   }
-
 }
