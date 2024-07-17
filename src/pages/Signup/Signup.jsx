@@ -82,7 +82,7 @@ const Signup = () => {
         password: password.value,
       });
       localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", JSON.stringify(data.token));
+      localStorage.setItem("token", data.token);
       setUser(data.user);
       setSignupLoading(false);
       displayAlert({
