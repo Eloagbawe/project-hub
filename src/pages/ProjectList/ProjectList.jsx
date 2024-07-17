@@ -85,51 +85,57 @@ const ProjectList = () => {
               )}
             </div>
             <div className="my-10 hidden md:block">
-              <Table>
-                <Thead>
-                  <Tr>
-                    <Th>Title</Th>
-                    <Th>Manager</Th>
-                    <Th>Updated</Th>
-                  </Tr>
-                </Thead>
-
-                <Tbody>
-                  {projectList?.map((project) => (
-                    <Tr
-                      key={project?.id}
-                      className="project__item"
-                      onClick={() => navigate(`/projects/${project.id}/board`)}
-                    >
-                      <Td className="project__name w-[30%] lg:w-[50%]">
-                        {project?.title}
-                      </Td>
-
-                      <Td className="project__text">
-                        <div className="project__manager-container flex gap-1 items-center">
-                          <Profile
-                            name={capitalizeInitials(
-                              project?.manager_first_name,
-                              project?.manager_last_name
-                            )}
-                            small={true}
-                          />
-                          <p className="project__manager">
-                            {project?.manager_first_name}{" "}
-                            {project?.manager_last_name}
-                          </p>
-                        </div>
-                      </Td>
-                      <Td className="project__text">
-                        <p className="project__timestamp">
-                          Last Updated:{" "}
-                          {moment(project?.updated_at).format("MMMM Do YYYY")}
-                        </p>
-                      </Td>
+              {projectList?.length > 0 ? (
+                <Table>
+                  <Thead>
+                    <Tr>
+                      <Th>Title</Th>
+                      <Th>Manager</Th>
+                      <Th>Updated</Th>
                     </Tr>
-                  ))}
-                </Tbody>
-              </Table>
+                  </Thead>
+
+                  <Tbody>
+                    {projectList?.map((project) => (
+                      <Tr
+                        key={project?.id}
+                        className="project__item"
+                        onClick={() =>
+                          navigate(`/projects/${project.id}/board`)
+                        }
+                      >
+                        <Td className="project__name w-[30%] lg:w-[50%]">
+                          {project?.title}
+                        </Td>
+
+                        <Td className="project__text">
+                          <div className="project__manager-container flex gap-1 items-center">
+                            <Profile
+                              name={capitalizeInitials(
+                                project?.manager_first_name,
+                                project?.manager_last_name
+                              )}
+                              small={true}
+                            />
+                            <p className="project__manager">
+                              {project?.manager_first_name}{" "}
+                              {project?.manager_last_name}
+                            </p>
+                          </div>
+                        </Td>
+                        <Td className="project__text">
+                          <p className="project__timestamp">
+                            Last Updated:{" "}
+                            {moment(project?.updated_at).format("MMMM Do YYYY")}
+                          </p>
+                        </Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              ) : (
+                <p>No projects created yet</p>
+              )}
             </div>
           </>
         )}
