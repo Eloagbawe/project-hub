@@ -81,7 +81,7 @@ const ProjectList = () => {
                   ))}
                 </>
               ) : (
-                <p>No projects created yet</p>
+                <p>No projects</p>
               )}
             </div>
             <div className="my-10 hidden md:block">
@@ -134,7 +134,7 @@ const ProjectList = () => {
                   </Tbody>
                 </Table>
               ) : (
-                <p>No projects created yet</p>
+                <p>No projects</p>
               )}
             </div>
           </>
