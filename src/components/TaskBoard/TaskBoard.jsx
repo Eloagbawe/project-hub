@@ -100,34 +100,37 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
         <Droppable droppableId="to do">
           {(provided) => (
             <div
-              className="task-board__item px-3 pt-3 pb-16 rounded-lg relative"
+              className="task-board__item px-3 pt-3 pb-6 rounded-lg"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              <p className="task-board__label">To do</p>
-              {todoTasks?.map((task, index) => (
-                <div className="task-board__task" key={task.id}>
-                  <Draggable draggableId={task.id} index={index}>
-                    {(provided) => (
-                      <TaskItem
-                        task={task}
-                        handleClick={openTaskDetails}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        innerRef={provided.innerRef}
-                      />
-                    )}
-                  </Draggable>
-                </div>
-              ))}
-
-              <button
-                className="task-board__btn absolute bottom-4 flex items-center gap-1"
-                onClick={openAddTask}
-              >
-                <img src={addIcon} alt="add task icon" />
-                <span>Add Task</span>
-              </button>
+              <div className="flex gap-3 justify-between items-center">
+                <p className="task-board__label">To do</p>
+                <button
+                  className="task-board__btn flex items-center gap-1"
+                  onClick={openAddTask}
+                >
+                  <img src={addIcon} alt="add task icon" />
+                  <span>Add Task</span>
+                </button>
+              </div>
+              <div className="task-board__tasklist">
+                {todoTasks?.map((task, index) => (
+                  <div className="task-board__task" key={task.id}>
+                    <Draggable draggableId={task.id} index={index}>
+                      {(provided) => (
+                        <TaskItem
+                          task={task}
+                          handleClick={openTaskDetails}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          innerRef={provided.innerRef}
+                        />
+                      )}
+                    </Draggable>
+                  </div>
+                ))}
+              </div>
               {provided.placeholder}
             </div>
           )}
@@ -135,26 +138,28 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
         <Droppable droppableId="in progress">
           {(provided) => (
             <div
-              className="task-board__item p-3 rounded-lg"
+              className="task-board__item px-3 pt-3 pb-6 rounded-lg"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
               <p className="task-board__label">In Progress</p>
-              {inProgressTasks?.map((task, index) => (
-                <div className="task-board__task" key={task.id}>
-                  <Draggable draggableId={task.id} index={index}>
-                    {(provided) => (
-                      <TaskItem
-                        task={task}
-                        handleClick={openTaskDetails}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        innerRef={provided.innerRef}
-                      />
-                    )}
-                  </Draggable>
-                </div>
-              ))}
+              <div className="task-board__tasklist">
+                {inProgressTasks?.map((task, index) => (
+                  <div className="task-board__task" key={task.id}>
+                    <Draggable draggableId={task.id} index={index}>
+                      {(provided) => (
+                        <TaskItem
+                          task={task}
+                          handleClick={openTaskDetails}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          innerRef={provided.innerRef}
+                        />
+                      )}
+                    </Draggable>
+                  </div>
+                ))}
+              </div>
               {provided.placeholder}
             </div>
           )}
@@ -163,26 +168,28 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
         <Droppable droppableId="in review">
           {(provided) => (
             <div
-              className="task-board__item p-3 rounded-lg"
+              className="task-board__item px-3 pt-3 pb-6 rounded-lg"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
               <p className="task-board__label">In Review</p>
-              {inReviewTasks?.map((task, index) => (
-                <div className="task-board__task" key={task.id}>
-                  <Draggable draggableId={task.id} index={index}>
-                    {(provided) => (
-                      <TaskItem
-                        task={task}
-                        handleClick={openTaskDetails}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        innerRef={provided.innerRef}
-                      />
-                    )}
-                  </Draggable>
-                </div>
-              ))}
+              <div className="task-board__tasklist">
+                {inReviewTasks?.map((task, index) => (
+                  <div className="task-board__task" key={task.id}>
+                    <Draggable draggableId={task.id} index={index}>
+                      {(provided) => (
+                        <TaskItem
+                          task={task}
+                          handleClick={openTaskDetails}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          innerRef={provided.innerRef}
+                        />
+                      )}
+                    </Draggable>
+                  </div>
+                ))}
+              </div>
               {provided.placeholder}
             </div>
           )}
@@ -190,26 +197,28 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
         <Droppable droppableId="done">
           {(provided) => (
             <div
-              className="task-board__item p-3 rounded-lg"
+              className="task-board__item px-3 pt-3 pb-6 rounded-lg"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
               <p className="task-board__label">Done</p>
-              {doneTasks?.map((task, index) => (
-                <div className="task-board__task" key={task.id}>
-                  <Draggable draggableId={task.id} index={index}>
-                    {(provided) => (
-                      <TaskItem
-                        task={task}
-                        handleClick={openTaskDetails}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        innerRef={provided.innerRef}
-                      />
-                    )}
-                  </Draggable>
-                </div>
-              ))}
+              <div className="task-board__tasklist">
+                {doneTasks?.map((task, index) => (
+                  <div className="task-board__task" key={task.id}>
+                    <Draggable draggableId={task.id} index={index}>
+                      {(provided) => (
+                        <TaskItem
+                          task={task}
+                          handleClick={openTaskDetails}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          innerRef={provided.innerRef}
+                        />
+                      )}
+                    </Draggable>
+                  </div>
+                ))}
+              </div>
               {provided.placeholder}
             </div>
           )}
