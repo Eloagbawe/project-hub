@@ -22,6 +22,14 @@
   }
 
   &__content {
-    min-height: 65vh;
+    min-height: 83vh;
+
+    @include tablet {
+      min-height: 78vh;
+    }
+
+    @include desktop {
+      min-height: 65vh;
+    }
   }
 }
