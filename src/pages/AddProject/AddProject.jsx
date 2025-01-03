@@ -56,11 +56,11 @@ const AddProject = () => {
       console.error(err);
       if (err.response.status === 401) {
         displayAlert({
-          text: 'Session Invalid, Please Log in',
-          status: 'error'
-        })
+          text: "Session Invalid, Please Log in",
+          status: "error",
+        });
         logoutUser();
-        navigate('/login')
+        navigate("/login");
       }
     }
   };
@@ -101,11 +101,11 @@ const AddProject = () => {
       setAddProjectLoading(false);
       if (err.response.status === 401) {
         displayAlert({
-          text: 'Session Invalid, Please Log in',
-          status: 'error'
-        })
+          text: "Session Invalid, Please Log in",
+          status: "error",
+        });
         logoutUser();
-        navigate('/login')
+        navigate("/login");
       } else {
         displayAlert({
           text: err.response?.data?.message,
@@ -174,54 +174,58 @@ const AddProject = () => {
                 Add Team Members
               </button>
 
-              <div className="mt-8 mb-2 flex items-center">
-                {members[0] && (
-                  <div>
-                    <Profile
-                      name={capitalizeInitials(
-                        members[0].first_name,
-                        members[0].last_name
-                      )}
-                      small={true}
-                    />
-                  </div>
-                )}
-                {members[1] && (
-                  <div className="add-project__member">
-                    <Profile
-                      name={capitalizeInitials(
-                        members[1].first_name,
-                        members[1].last_name
-                      )}
-                      small={true}
-                    />
-                  </div>
-                )}
-                {members[2] && (
-                  <div className="add-project__member">
-                    <Profile
-                      name={capitalizeInitials(
-                        members[2].first_name,
-                        members[2].last_name
-                      )}
-                      small={true}
-                    />
-                  </div>
-                )}
-                {members.length > 3 && (
-                  <p className="add-project__team ml-1">
-                    + {members.length - 3}
-                  </p>
-                )}
+              <div className="my-8 flex gap-4 flex-wrap">
+                <div className="flex items-center">
+                  {members[0] && (
+                    <div>
+                      <Profile
+                        name={capitalizeInitials(
+                          members[0].first_name,
+                          members[0].last_name
+                        )}
+                        small={true}
+                      />
+                    </div>
+                  )}
+                  {members[1] && (
+                    <div className="add-project__member">
+                      <Profile
+                        name={capitalizeInitials(
+                          members[1].first_name,
+                          members[1].last_name
+                        )}
+                        small={true}
+                      />
+                    </div>
+                  )}
+                  {members[2] && (
+                    <div className="add-project__member">
+                      <Profile
+                        name={capitalizeInitials(
+                          members[2].first_name,
+                          members[2].last_name
+                        )}
+                        small={true}
+                      />
+                    </div>
+                  )}
+                  {members.length > 3 && (
+                    <p className="add-project__team ml-1">
+                      + {members.length - 3}
+                    </p>
+                  )}
+      
+                </div>
+
                 {members.length > 0 && (
-                  <button
-                    className="add-project__manage block ml-2 rounded-lg px-2 py-1"
-                    type="button"
-                    onClick={() => openDisplayMembersModal()}
-                  >
-                    Manage Team
-                  </button>
-                )}
+                    <button
+                      className="add-project__manage block rounded-lg px-2 py-1"
+                      type="button"
+                      onClick={() => openDisplayMembersModal()}
+                    >
+                      Manage Team
+                    </button>
+                  )}
               </div>
             </div>
           </div>
