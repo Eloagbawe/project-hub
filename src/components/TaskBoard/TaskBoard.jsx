@@ -13,7 +13,6 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
     inReviewTasks,
     doneTasks,
     tasksData,
-    filterTasks,
     setTodoTasks,
     setInProgressTasks,
     setInReviewTasks,
@@ -37,60 +36,109 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
     const sourceStatus = source.droppableId;
     const destinationStatus = destination.droppableId;
 
+    const task_state = {
+      to_do: todoTasks,
+      in_progress: inProgressTasks,
+      in_review: inReviewTasks,
+      done: doneTasks
+    }
+
     const tasks = [...tasksData.tasks];
     const task = tasks.find((task) => task.id === draggableId);
 
     task.status = destinationStatus;
-    filterTasks(tasks);
 
     let destinationColumn = [];
-    let setFunction;
+    let sourceColumn = [];
+    let setDestFunction;
+    let setSrcFunction;
+
+    switch (sourceStatus) {
+      case "to do": {
+        sourceColumn = todoTasks;
+        setSrcFunction = setTodoTasks;
+        break;
+      }
+      case "in progress": {
+        sourceColumn = inProgressTasks;
+        setSrcFunction = setInProgressTasks;
+        break;
+      }
+      case "in review": {
+        sourceColumn = inReviewTasks;
+        setSrcFunction = setInReviewTasks;
+        break;
+      }
+      case "done": {
+        sourceColumn = doneTasks;
+        setSrcFunction = setDoneTasks;
+        break;
+      }
+      default: {
+        sourceColumn = [];
+        setSrcFunction = null;
+      }
+    }
 
     switch (destinationStatus) {
       case "to do": {
         destinationColumn = todoTasks;
-        setFunction = setTodoTasks;
+        setDestFunction = setTodoTasks;
         break;
       }
       case "in progress": {
         destinationColumn = inProgressTasks;
-        setFunction = setInProgressTasks;
+        setDestFunction = setInProgressTasks;
         break;
       }
       case "in review": {
         destinationColumn = inReviewTasks;
-        setFunction = setInReviewTasks;
+        setDestFunction = setInReviewTasks;
         break;
       }
       case "done": {
         destinationColumn = doneTasks;
-        setFunction = setDoneTasks;
+        setDestFunction = setDoneTasks;
         break;
       }
       default: {
         destinationColumn = [];
-        setFunction = null;
+        setDestFunction = null;
       }
     }
 
-    let newTasks = Array.from(destinationColumn);
+    let newDestTasks = Array.from(destinationColumn);
+    let newSrcTasks = Array.from(sourceColumn);
 
     if (destinationStatus === sourceStatus) {
-      newTasks.splice(source.index, 1);
-    }
-    newTasks.splice(destination.index, 0, task);
-    setFunction(newTasks);
-
-    if (destinationStatus === sourceStatus) {
-      return;
+      newSrcTasks.splice(source.index, 1);
+      newSrcTasks.splice(destination.index, 0, task);
+      setSrcFunction(newSrcTasks);
+    } else {
+      newDestTasks.splice(destination.index, 0, task);
+      newSrcTasks.splice(source.index, 1);
+      setDestFunction(newDestTasks);
+      setSrcFunction(newSrcTasks);
     }
 
     try {
-      await projectHubApi.updateTask(tasksData.project_id, task.id, task);
+      await projectHubApi.updateTask(tasksData.project_id, task.id, { ...task, 
+        status: {
+          src: sourceStatus,
+          dest: destinationStatus,
+          pos: {
+            src: source.index,
+            dest: destination.index
+          }
+        }
+      }
+    );
     } catch (err) {
       console.error(err);
-      task.status = sourceStatus;
-      filterTasks(tasks);
+      setTodoTasks(task_state.to_do);
+      setInProgressTasks(task_state.in_progress);
+      setInReviewTasks(task_state.in_review);
+      setDoneTasks(task_state.done);
     }
   };
 
