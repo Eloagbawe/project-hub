@@ -25,7 +25,7 @@ const DeleteTask = ({ isOpen, onClose, task }) => {
     setDeleteTaskLoading(true);
 
     try {
-      await projectHubApi.deleteTask(project.id, task.id);
+      await projectHubApi.deleteTask(project.id, task.id, task.status);
       await getTasks(project.id);
       setDeleteTaskLoading(false);
       displayAlert({

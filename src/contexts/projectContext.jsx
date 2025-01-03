@@ -58,26 +58,19 @@ export const ProjectProvider = ({ children }) => {
     }
   };
 
-  const filterTasks = (tasks) => {
-    setTodoTasks(tasks?.filter((task) => task.status === "to do"));
-    setInProgressTasks(tasks?.filter((task) => task.status === "in progress"));
-    setInReviewTasks(tasks?.filter((task) => task.status === "in review"));
-    setDoneTasks(tasks?.filter((task) => task.status === "done"));
-  };
-
   const getTasks = async (projectId) => {
     setTasksLoading(true);
     try {
       const { data } = await projectHubApi.getTasks(projectId);
       setTasksLoading(false);
-      setTasksData(data);
       const { tasks } = data;
-      setTodoTasks(tasks?.filter((task) => task.status === "to do"));
-      setInProgressTasks(
-        tasks?.filter((task) => task.status === "in progress")
-      );
-      setInReviewTasks(tasks?.filter((task) => task.status === "in review"));
-      setDoneTasks(tasks?.filter((task) => task.status === "done"));
+      setTasksData({...data,
+        tasks: [...tasks.todo, ...tasks.inProgress, ...tasks.inReview, ...tasks.done]
+      });
+      setTodoTasks(tasks?.todo);
+      setInProgressTasks(tasks?.inProgress);
+      setInReviewTasks(tasks?.inReview);
+      setDoneTasks(tasks?.done);
     } catch (err) {
       console.error(err);
       setTasksLoading(false);
@@ -117,7 +110,6 @@ export const ProjectProvider = ({ children }) => {
         inReviewTasks,
         doneTasks,
         getTasks,
-        filterTasks,
         setTodoTasks,
         setInProgressTasks,
         setInReviewTasks,

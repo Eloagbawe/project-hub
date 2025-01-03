@@ -122,3 +122,7 @@ export const validateSignupInput = (input) => {
 export const capitalizeInitials = (first_name, last_name) => {
   return `${first_name[0].toUpperCase()}${last_name[0].toUpperCase()}`;
 };
+
+export const stripTitle = (title) => {
+  return title && title.length > 30 ? `${title.substring(0, 30)}...` : title;
+}

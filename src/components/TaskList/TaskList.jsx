@@ -18,12 +18,12 @@ const TaskList = ({ openTaskDetails, openAddTask }) => {
             className="task-list__card flex flex-col gap-5 p-3"
             onClick={() => openTaskDetails(task)}
           >
-            <div className="flex gap-3 justify-between">
-              <div className="w-[70%]">
+            <div className="flex flex-wrap gap-3 justify-between">
+              <div className="w-[100%] sm:w-[80%]">
                 <p className="task-list__label">TITLE</p>
                 <p className="task-list__text">{task.title}</p>
               </div>
-              <div>
+              <div className="">
                 <p className="task-list__label">STATUS</p>
                 <p className="task-list__text">{task.status}</p>
               </div>

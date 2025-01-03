@@ -13,7 +13,6 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
     inReviewTasks,
     doneTasks,
     tasksData,
-    filterTasks,
     setTodoTasks,
     setInProgressTasks,
     setInReviewTasks,
@@ -37,60 +36,109 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
     const sourceStatus = source.droppableId;
     const destinationStatus = destination.droppableId;
 
+    const task_state = {
+      to_do: todoTasks,
+      in_progress: inProgressTasks,
+      in_review: inReviewTasks,
+      done: doneTasks
+    }
+
     const tasks = [...tasksData.tasks];
     const task = tasks.find((task) => task.id === draggableId);
 
     task.status = destinationStatus;
-    filterTasks(tasks);
 
     let destinationColumn = [];
-    let setFunction;
+    let sourceColumn = [];
+    let setDestFunction;
+    let setSrcFunction;
+
+    switch (sourceStatus) {
+      case "to do": {
+        sourceColumn = todoTasks;
+        setSrcFunction = setTodoTasks;
+        break;
+      }
+      case "in progress": {
+        sourceColumn = inProgressTasks;
+        setSrcFunction = setInProgressTasks;
+        break;
+      }
+      case "in review": {
+        sourceColumn = inReviewTasks;
+        setSrcFunction = setInReviewTasks;
+        break;
+      }
+      case "done": {
+        sourceColumn = doneTasks;
+        setSrcFunction = setDoneTasks;
+        break;
+      }
+      default: {
+        sourceColumn = [];
+        setSrcFunction = null;
+      }
+    }
 
     switch (destinationStatus) {
       case "to do": {
         destinationColumn = todoTasks;
-        setFunction = setTodoTasks;
+        setDestFunction = setTodoTasks;
         break;
       }
       case "in progress": {
         destinationColumn = inProgressTasks;
-        setFunction = setInProgressTasks;
+        setDestFunction = setInProgressTasks;
         break;
       }
       case "in review": {
         destinationColumn = inReviewTasks;
-        setFunction = setInReviewTasks;
+        setDestFunction = setInReviewTasks;
         break;
       }
       case "done": {
         destinationColumn = doneTasks;
-        setFunction = setDoneTasks;
+        setDestFunction = setDoneTasks;
         break;
       }
       default: {
         destinationColumn = [];
-        setFunction = null;
+        setDestFunction = null;
       }
     }
 
-    let newTasks = Array.from(destinationColumn);
+    let newDestTasks = Array.from(destinationColumn);
+    let newSrcTasks = Array.from(sourceColumn);
 
     if (destinationStatus === sourceStatus) {
-      newTasks.splice(source.index, 1);
-    }
-    newTasks.splice(destination.index, 0, task);
-    setFunction(newTasks);
-
-    if (destinationStatus === sourceStatus) {
-      return;
+      newSrcTasks.splice(source.index, 1);
+      newSrcTasks.splice(destination.index, 0, task);
+      setSrcFunction(newSrcTasks);
+    } else {
+      newDestTasks.splice(destination.index, 0, task);
+      newSrcTasks.splice(source.index, 1);
+      setDestFunction(newDestTasks);
+      setSrcFunction(newSrcTasks);
     }
 
     try {
-      await projectHubApi.updateTask(tasksData.project_id, task.id, task);
+      await projectHubApi.updateTask(tasksData.project_id, task.id, { ...task, 
+        status: {
+          src: sourceStatus,
+          dest: destinationStatus,
+          pos: {
+            src: source.index,
+            dest: destination.index
+          }
+        }
+      }
+    );
     } catch (err) {
       console.error(err);
-      task.status = sourceStatus;
-      filterTasks(tasks);
+      setTodoTasks(task_state.to_do);
+      setInProgressTasks(task_state.in_progress);
+      setInReviewTasks(task_state.in_review);
+      setDoneTasks(task_state.done);
     }
   };
 
@@ -100,34 +148,37 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
         <Droppable droppableId="to do">
           {(provided) => (
             <div
-              className="task-board__item px-3 pt-3 pb-16 rounded-lg relative"
+              className="task-board__item px-3 pt-3 pb-6 rounded-lg"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              <p className="task-board__label">To do</p>
-              {todoTasks?.map((task, index) => (
-                <div className="task-board__task" key={task.id}>
-                  <Draggable draggableId={task.id} index={index}>
-                    {(provided) => (
-                      <TaskItem
-                        task={task}
-                        handleClick={openTaskDetails}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        innerRef={provided.innerRef}
-                      />
-                    )}
-                  </Draggable>
-                </div>
-              ))}
-
-              <button
-                className="task-board__btn absolute bottom-4 flex items-center gap-1"
-                onClick={openAddTask}
-              >
-                <img src={addIcon} alt="add task icon" />
-                <span>Add Task</span>
-              </button>
+              <div className="flex gap-3 justify-between items-center">
+                <p className="task-board__label">To do</p>
+                <button
+                  className="task-board__btn flex items-center gap-1"
+                  onClick={openAddTask}
+                >
+                  <img src={addIcon} alt="add task icon" />
+                  <span>Add Task</span>
+                </button>
+              </div>
+              <div className="task-board__tasklist">
+                {todoTasks?.map((task, index) => (
+                  <div className="task-board__task" key={task.id}>
+                    <Draggable draggableId={task.id} index={index}>
+                      {(provided) => (
+                        <TaskItem
+                          task={task}
+                          handleClick={openTaskDetails}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          innerRef={provided.innerRef}
+                        />
+                      )}
+                    </Draggable>
+                  </div>
+                ))}
+              </div>
               {provided.placeholder}
             </div>
           )}
@@ -135,26 +186,28 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
         <Droppable droppableId="in progress">
           {(provided) => (
             <div
-              className="task-board__item p-3 rounded-lg"
+              className="task-board__item px-3 pt-3 pb-6 rounded-lg"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
               <p className="task-board__label">In Progress</p>
-              {inProgressTasks?.map((task, index) => (
-                <div className="task-board__task" key={task.id}>
-                  <Draggable draggableId={task.id} index={index}>
-                    {(provided) => (
-                      <TaskItem
-                        task={task}
-                        handleClick={openTaskDetails}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        innerRef={provided.innerRef}
-                      />
-                    )}
-                  </Draggable>
-                </div>
-              ))}
+              <div className="task-board__tasklist">
+                {inProgressTasks?.map((task, index) => (
+                  <div className="task-board__task" key={task.id}>
+                    <Draggable draggableId={task.id} index={index}>
+                      {(provided) => (
+                        <TaskItem
+                          task={task}
+                          handleClick={openTaskDetails}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          innerRef={provided.innerRef}
+                        />
+                      )}
+                    </Draggable>
+                  </div>
+                ))}
+              </div>
               {provided.placeholder}
             </div>
           )}
@@ -163,26 +216,28 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
         <Droppable droppableId="in review">
           {(provided) => (
             <div
-              className="task-board__item p-3 rounded-lg"
+              className="task-board__item px-3 pt-3 pb-6 rounded-lg"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
               <p className="task-board__label">In Review</p>
-              {inReviewTasks?.map((task, index) => (
-                <div className="task-board__task" key={task.id}>
-                  <Draggable draggableId={task.id} index={index}>
-                    {(provided) => (
-                      <TaskItem
-                        task={task}
-                        handleClick={openTaskDetails}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        innerRef={provided.innerRef}
-                      />
-                    )}
-                  </Draggable>
-                </div>
-              ))}
+              <div className="task-board__tasklist">
+                {inReviewTasks?.map((task, index) => (
+                  <div className="task-board__task" key={task.id}>
+                    <Draggable draggableId={task.id} index={index}>
+                      {(provided) => (
+                        <TaskItem
+                          task={task}
+                          handleClick={openTaskDetails}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          innerRef={provided.innerRef}
+                        />
+                      )}
+                    </Draggable>
+                  </div>
+                ))}
+              </div>
               {provided.placeholder}
             </div>
           )}
@@ -190,26 +245,28 @@ const TaskBoard = ({ openTaskDetails, openAddTask }) => {
         <Droppable droppableId="done">
           {(provided) => (
             <div
-              className="task-board__item p-3 rounded-lg"
+              className="task-board__item px-3 pt-3 pb-6 rounded-lg"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
               <p className="task-board__label">Done</p>
-              {doneTasks?.map((task, index) => (
-                <div className="task-board__task" key={task.id}>
-                  <Draggable draggableId={task.id} index={index}>
-                    {(provided) => (
-                      <TaskItem
-                        task={task}
-                        handleClick={openTaskDetails}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        innerRef={provided.innerRef}
-                      />
-                    )}
-                  </Draggable>
-                </div>
-              ))}
+              <div className="task-board__tasklist">
+                {doneTasks?.map((task, index) => (
+                  <div className="task-board__task" key={task.id}>
+                    <Draggable draggableId={task.id} index={index}>
+                      {(provided) => (
+                        <TaskItem
+                          task={task}
+                          handleClick={openTaskDetails}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          innerRef={provided.innerRef}
+                        />
+                      )}
+                    </Draggable>
+                  </div>
+                ))}
+              </div>
               {provided.placeholder}
             </div>
           )}
