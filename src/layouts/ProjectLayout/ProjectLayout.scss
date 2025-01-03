@@ -15,7 +15,7 @@
 
   .nav {
     border-right: 1px solid var(--divider);
-    min-height: 90vh;
+    height: 90vh;
     
     &__header {
       @extend .section-header;
@@ -52,10 +52,6 @@
     }
   }
 
-  &__content {
-    min-height: 90vh;
-  }
-
   .project {
     &__team {
       @extend .body-medium;
@@ -68,4 +64,15 @@
     }
 
   }
+
+  &__content {
+    min-height: 93vh;
+
+    @include tablet {
+      min-height: auto;
+      height: 90vh;
+    }
+  }
+
+
 }

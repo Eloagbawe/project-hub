@@ -5,7 +5,7 @@ import settingsIcon from "../../assets/icons/settings.svg";
 import MenuDropDown from "../../components/Menu/Menu";
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/userContext";
-import { capitalizeInitials } from "../../utils";
+import { capitalizeInitials, stripTitle } from "../../utils";
 import Profile from "../../components/Profile/Profile";
 import { Divider } from "@chakra-ui/react";
 import ProjectActions from "../../components/ProjectActions/ProjectActions";
@@ -79,7 +79,7 @@ const ProjectLayout = ({ children }) => {
 
           <div className="my-10 px-2 flex gap-2">
             <div className="w-[80%]">
-              <h3 className="nav__header break-words">{project?.title}</h3>
+              <h3 className="nav__header break-words">{stripTitle(project?.title)}</h3>
               <p className="nav__sub-text">Project</p>
             </div>
             {(project?.manager_id === user?.id) && <div className="mt-1 cursor-pointer">
@@ -193,7 +193,7 @@ const ProjectLayout = ({ children }) => {
             <h3 className="nav__header">{project?.title}</h3>
             <p className="nav__sub-text">Project</p>
           </div> */}
-          <div className="px-2 md:px-4">{children}</div>
+          <div className="project__content px-2 md:px-4">{children}</div>
         </section>
       </div>
       <Footer />
