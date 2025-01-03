@@ -26,6 +26,7 @@ const TaskDetails = ({ isOpen, onClose, task }) => {
 
   const [assignee, setAssignee] = useState("");
   const [status, setStatus] = useState("");
+  const [prevStatus, setPrevStatus] = useState("");
   const [deleteModal, setDeleteModal] = useState(false);
 
   const handleUpdateTask = async (e) => {
@@ -39,9 +40,17 @@ const TaskDetails = ({ isOpen, onClose, task }) => {
     const payload = {
       title,
       description,
-      user_id: assignee || null,
-      status,
+      user_id: assignee || null
     };
+
+
+    if (status !== prevStatus) {
+      payload.status = {
+        src: prevStatus,
+        dest: status,
+        pos: null
+      }
+    }
 
     setUpdateTaskLoading(true);
 
@@ -69,6 +78,7 @@ const TaskDetails = ({ isOpen, onClose, task }) => {
       setDescription(task?.description);
       setAssignee(task?.user?.id || "");
       setStatus(task?.status);
+      setPrevStatus(task?.status);
     }
   }, [task]);
   return (
